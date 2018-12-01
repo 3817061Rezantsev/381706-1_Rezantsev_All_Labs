@@ -1,9 +1,7 @@
 #pragma once
 #include <iostream>
 #include <math.h>
-
 template <class T>
-
 class TVector
 {
 protected:
@@ -13,9 +11,10 @@ public:
 	TVector();
 	TVector(TVector &A);
 	TVector(T* s, int _length);
-	~TVector();
+	
 	int GetLength();
 	T& GetValue(int i);
+	void SetValue(int i, T a);
 	TVector<T> operator+(TVector<T> &A);
 	TVector<T> operator-(TVector<T> &A);
 	T operator*(TVector<T> &A);
@@ -62,12 +61,12 @@ TVector<T>::TVector(T* s, int _length)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>::~TVector()
+void TVector<T>::SetValue(int i, T a)
 {
-	length = 0;
-	if (vector != 0)
-		delete[]vector;
+	vector[i] = a;
 }
+// ---------------------------------------------------------------------------
+
 // ---------------------------------------------------------------------------
 template <class T>
 int TVector<T>::GetLength()
@@ -211,8 +210,7 @@ TVector<T>& TVector<T>::operator=(TVector<T> &A)
 template <class T>
 T& TVector<T>::GetValue(int i)
 {
-	if (i >= 0 && i <= length)
-		return vector[i];
+	return vector[i];
 	throw 1;
 }
 // ---------------------------------------------------------------------------

@@ -7,6 +7,8 @@ set(VectorLib VectorLib) #Переменная с именем библиотеки
 set (Matrix Matrix)
 set (MatrixLib MatrixLib)
 set (test test)
+set (Stak Stak)
+set (StakLib StakLib)
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
@@ -19,11 +21,17 @@ add_subdirectory(gtest)
 add_subdirectory(test)
 add_subdirectory(VectorLib)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}MatrixLib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MatrixLib)
 add_subdirectory(Matrix)
 add_subdirectory(MatrixLib)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StakLib)
+add_subdirectory(Stak)
+add_subdirectory(StakLib)
 
 #target_link_libraries(${Vector} ${VectorLib} ) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
 
 #target_link_libraries(${Vector} ${MatrixLib} )
+#target_link_libraries(${Matrix} ${MatrixLib} )
+#target_link_libraries(${Matrix} ${VectorLib} )
+#target_link_libraries(${Stak} ${StakLib} )

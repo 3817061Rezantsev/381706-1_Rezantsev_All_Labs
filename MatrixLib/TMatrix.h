@@ -3,9 +3,8 @@
 #include <stdio.h>
 #include <math.h>
 #include "../VectorLib/TVector.h"
-
+using namespace std;
 template <class T>
-
 class TMatrix: public TVector<T>
 {
 public:
@@ -190,10 +189,9 @@ std::ostream& operator<<(std::ostream &A, TMatrix<T> &B)
 	for (int i = 0; i < n; i++)
 	{
 		int b = B.GetValue(i);
-		printf("%d", b);
-		A << "\n";
+		cout << b << "\t";
 	}
-		
+		A << "\n";	
 	return A;
 }
 // ---------------------------------------------------------------------------
