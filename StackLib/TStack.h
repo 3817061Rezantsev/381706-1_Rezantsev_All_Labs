@@ -1,22 +1,23 @@
+#pragma once
 #include <iostream>
 using namespace std;
 template <class T>
-class TStak
+class TStack
 {
-private:
+protected:
 	int size;
 	int r;
 	T* m;
 public:
-	TStak(int n);
-	TStak(TStak<T> &A);
+	TStack(int n);
+	TStack(TStack<T> &A);
 	void Put(T A);
 	T Get();
 	bool IsFull();
 	bool IsEmply();
 };
 template <class T>
-TStak<T>::TStak(int n)
+TStack<T>::TStack(int n)
 {
 	if (n < 0)
 		throw -1;
@@ -34,7 +35,7 @@ TStak<T>::TStak(int n)
 	}
 }
 template <class T>
-TStak<T>::TStak(TStak<T> &A)
+TStack<T>::TStack(TStack<T> &A)
 {
 	size = A.size;
 	r = A.r;
@@ -48,7 +49,7 @@ TStak<T>::TStak(TStak<T> &A)
 	}
 }
 template <class T>
-void TStak<T>::Put(T A)
+void TStack<T>::Put(T A)
 {
 	if (IsFull())
 		throw 0;
@@ -59,7 +60,7 @@ void TStak<T>::Put(T A)
 	}
 }
 template <class T>
-T TStak<T>::Get()
+T TStack<T>::Get()
 {
 	if (IsEmply())
 		throw 1;
@@ -70,7 +71,7 @@ T TStak<T>::Get()
 	}
 }
 template <class T>
-bool TStak<T>::IsFull()
+bool TStack<T>::IsFull()
 {
 	if ((r >= size)&&(size!=0))
 		return true;
@@ -78,7 +79,7 @@ bool TStak<T>::IsFull()
 		return false;
 }
 template <class T>
-bool TStak<T>::IsEmply()
+bool TStack<T>::IsEmply()
 {
 	if (r == 0)
 		return true;

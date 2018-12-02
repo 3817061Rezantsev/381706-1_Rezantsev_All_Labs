@@ -7,8 +7,12 @@ set(VectorLib VectorLib) #Переменная с именем библиотеки
 set (Matrix Matrix)
 set (MatrixLib MatrixLib)
 set (test test)
-set (Stak Stak)
-set (StakLib StakLib)
+set (Stack Stack)
+set (StackLib StackLib)
+set (Queue Queue)
+set (QueueLib QueueLib)
+set (MStack MStack)
+set (MStackLib MStackLib)
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
@@ -25,13 +29,24 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MatrixLib)
 add_subdirectory(Matrix)
 add_subdirectory(MatrixLib)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StakLib)
-add_subdirectory(Stak)
-add_subdirectory(StakLib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StackLib)
+add_subdirectory(Stack)
+add_subdirectory(StackLib)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/QueueLib)
+add_subdirectory(Queue)
+add_subdirectory(QueueLib)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MStackLib)
+add_subdirectory(MStack)
+add_subdirectory(MStackLib)
 
 #target_link_libraries(${Vector} ${VectorLib} ) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
 
 #target_link_libraries(${Vector} ${MatrixLib} )
 #target_link_libraries(${Matrix} ${MatrixLib} )
 #target_link_libraries(${Matrix} ${VectorLib} )
-#target_link_libraries(${Stak} ${StakLib} )
+#target_link_libraries(${Stack} ${StackLib} )
+#target_link_libraries(${MStack} ${MStackLib} )
+#target_link_libraries(${Queue} ${StackLib} )
+#target_link_libraries(${Queue} ${QueueLib} )

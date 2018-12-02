@@ -1,11 +1,11 @@
 #include <iostream>
-#include "TStak.h"
+#include "TStack.h"
 using namespace std;
 void main()
 {
 	try 
 	{
-		TStak<int> A(5);
+		TStack<int> A(5);
 		A.Put(10);
 		A.Put(5);
 		int b = A.Get();
@@ -19,8 +19,8 @@ void main()
 		if (a == -1)
 			cout << "n < 0" << "\n";
 		if (a == 0)
-			cout << "StakIsFull" << "\n";
+			cout << "IsFull" << "\n";
 		if (a == 1)
-			cout << "StakIsEmpty" << "\n";
+			cout << "IsEmpty" << "\n";
 	}
 }
