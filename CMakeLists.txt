@@ -1,21 +1,52 @@
-п»їcmake_minimum_required(VERSION 2.8) #РџСЂРѕРІРµСЂРєР° РІРµСЂСЃРёРё CMake.
+cmake_minimum_required(VERSION 2.8) #Проверка версии CMake.
 
-set(PROJECT_NAME 381706-1_Rezantsev_All_Labs) #РЎРѕР·РґР°РµРј РѕР±С‹С‡РЅСѓСЋ Р»РѕРєР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЃ РёРјРµРЅРµРј РїСЂРѕРµРєС‚Р°
-project(${PROJECT_NAME}) # РќР°Р·РІР°РЅРёРµ РїСЂРѕРµРєС‚Р°
-
-set(MyLib1 MyLib1) #РџРµСЂРµРјРµРЅРЅР°СЏ СЃ РёРјРµРЅРµРј Р±РёР±Р»РёРѕС‚РµРєРё
-
-set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #РЎРѕР·РґР°РµС‚СЃСЏ РїРµСЂРµРјРµРЅРЅР°СЏ CMAKE_CONFIGURATION_TYPES СЃРѕ Р·РЅР°С‡РµРЅРёРµРј "Debug;Release" Рё РјРµС‚РєРѕР№/СЂР°Р·РґРµР»РѕРј Configs, РїРµСЂРµРјРµРЅРЅР°СЏ СЃРѕС…СЂР°РЅРёРµС‚СЃСЏ РІ СЃРїРµС†РёР°Р»СЊРЅРѕРј С„Р°Р№Р»Рµ РґРѕСЃС‚СѓРїРЅРѕРј РёР· РІСЃРµС… С„Р°Р№Р»РѕРІ,
-if(NOT CMAKE_BUILD_TYPE) # РїСЂРѕРІРµСЂРєР° РёРјРµСЋС‰РёС…СЃСЏ Сѓ РєРѕРјРїРёР»СЏС‚РѕСЂР° РІР°СЂРёР°РЅС‚РѕРІ СЃР±РѕСЂРєРё
-  set(CMAKE_BUILD_TYPE Release) #Р•СЃР»Рё РЅРµС‚ С‚Рѕ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј Release
+set(PROJECT_NAME 381706-1_Rezantsev_All_Labs) #Создаем обычную локальную переменную с именем проекта
+project(${PROJECT_NAME}) # Название проекта
+set (Vector Vector)
+set(VectorLib VectorLib) #Переменная с именем библиотеки
+set (Matrix Matrix)
+set (MatrixLib MatrixLib)
+set (test test)
+set (Stack Stack)
+set (StackLib StackLib)
+set (Queue Queue)
+set (QueueLib QueueLib)
+set (MStack MStack)
+set (MStackLib MStackLib)
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
+if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
+  set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
 endif()
 
-file(GLOB hdrs "*.h*") #Р”РѕР±Р°РІР»СЏРµРј РІ РїРµСЂРµРјРµРЅРЅСѓСЋ hdrs РІСЃРµ С„Р°Р№Р»С‹ СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј .h
-file(GLOB srcs "*.cpp") #Р”РѕР±Р°РІР»СЏРµРј РІ РїРµСЂРµРјРµРЅРЅСѓСЋ srcs РІСЃРµ С„Р°Р№Р»С‹ СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј .cpp
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib
+${CMAKE_CURRENT_SOURCE_DIR}/gtest)
+add_subdirectory(Vector)
+add_subdirectory(gtest)
+add_subdirectory(test)
+add_subdirectory(VectorLib)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MatrixLib)
+add_subdirectory(Matrix)
+add_subdirectory(MatrixLib)
 
-add_executable(${PROJECT_NAME} ${srcs} ${hdrs}) #РЎРѕР·РґР°РµРј РїСЂРѕРµРєС‚ СЃ РёРјРµРЅРµРј РёР· РїРµСЂРµРјРµРЅРЅРѕР№ ${PROJECT_NAME}, РІ РЅРµРіРѕ РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ С„Р°Р№Р»С‹ РёР· РїРµСЂРµРјРµРЅРЅС‹С… ${srcs} Рё ${hdrs}
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StackLib)
+add_subdirectory(Stack)
+add_subdirectory(StackLib)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/QueueLib)
+add_subdirectory(Queue)
+add_subdirectory(QueueLib)
 
-#add_subdirectory(lib1) #РЎРѕР±РёСЂР°РµРј РїСЂРѕРµРєС‚ РІ РїРѕРґРґРёСЂРµРєС‚РѕСЂРёРё lib1
-#target_link_libraries(${PROJECT_NAME} ${MyLib1}) #РџРѕРґРєР»СЋС‡Р°РµРј Рє РїСЂРѕРµРєС‚Сѓ СЃ РёРјРµРЅРµРј ${PROJECT_NAME} Р±РёР±Р»РёРѕС‚РµРєСѓ СЃ РёРјРµРЅРµРј ${MyLib1}
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MStackLib)
+add_subdirectory(MStack)
+add_subdirectory(MStackLib)
+
+#target_link_libraries(${Vector} ${VectorLib} ) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
+
+#target_link_libraries(${Vector} ${MatrixLib} )
+#target_link_libraries(${Matrix} ${MatrixLib} )
+#target_link_libraries(${Matrix} ${VectorLib} )
+#target_link_libraries(${Stack} ${StackLib} )
+#target_link_libraries(${MStack} ${MStackLib} )
+#target_link_libraries(${Queue} ${StackLib} )
+#target_link_libraries(${Queue} ${QueueLib} )
