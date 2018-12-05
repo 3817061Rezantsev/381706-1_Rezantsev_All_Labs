@@ -1,245 +1,242 @@
 #pragma once
 #include <iostream>
 #include <math.h>
+using namespace std;
 template <class T>
 class TVector
 {
 protected:
-	T* vector;
-	int length;
+  int size;
+  T *vector;
 public:
-	TVector();
-	TVector(TVector &A);
-	TVector(T* s, int _length);
-	
-	int GetLength();
-	T& GetValue(int i);
-	void SetValue(int i, T a);
-	TVector<T> operator+(TVector<T> &A);
-	TVector<T> operator-(TVector<T> &A);
-	T operator*(TVector<T> &A);
-	TVector<T> operator*(T a);
-	TVector<T> operator+(T a);
-	TVector<T> operator-(T a);
-	TVector<T>& operator=(TVector<T> &A);
-	int operator==(TVector<T> &A);
-	T& operator[](int i);
-	template <class T>
-	friend std::istream& operator>>(std::istream& A, TVector<T>& B);
-	template <class T>
-	friend std::ostream& operator<<(std::ostream& A, TVector<T>& B);
+  TVector<T>(int n = 0);
+  TVector<T>(const TVector<T> &A);
+  virtual ~TVector<T>();
+
+  int GetSize() const;
+  T& operator[](int i);
+  bool operator==(const TVector<T> &A);
+  TVector& operator=(const TVector<T> &A);
+
+  TVector operator++();
+  TVector operator++(int);
+  TVector operator--();
+  TVector operator--(int);
+  TVector operator+() const;
+  TVector operator-() const;
+  TVector operator+(const TVector<T> &A);
+  TVector operator-(const TVector<T> &A);
+
+  T operator*(const TVector<T> &A);
+  TVector operator*(T A);
+  template <class FriendT> friend TVector<FriendT> operator*(FriendT a, const TVector<FriendT> &A);
+
+  template <class FriendT> friend istream& operator>>(istream &in, TVector<FriendT> &A);
+  template <class FriendT> friend ostream& operator<<(ostream &out, const TVector<FriendT> &AV);
 };
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>::TVector()
-{
-	vector = 0;
-	length = 0;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>::TVector(TVector &A)
-{
-	length = A.length;
-	if (length != 0)
-	{
-		vector = new T[length];
-		for (int i = 0; i < length; i++)
-			vector[i] = A.vector[i];
-	}
-	else
-		vector = 0;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>::TVector(T* s, int _length)
-{
-	length = _length;
-	vector = new T[length];
-	for (int i = 0; i < length; i++)
-		vector[i] = s[i];
-}
-// ---------------------------------------------------------------------------
-template <class T>
-void TVector<T>::SetValue(int i, T a)
-{
-	vector[i] = a;
-}
-// ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
-template <class T>
-int TVector<T>::GetLength()
-{
-	return length;
-}
-// ---------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
 template<class T>
-TVector<T> TVector<T>::operator+(T a)
+TVector<T>::TVector(int n) 
 {
-	vector[0] = vector[0] + a;
-	return vector;
+  if (n < 0)
+	throw -1;
+  else
+	if (n == 0) 
+	{
+	  size = n;
+	  vector = NULL;
+	}
+	else 
+	{
+	  size = n;
+	  vector = new T[size];
+	  for (int i = 0; i < size; i++)
+		vector[i] = 0;
+	}
 }
-// ---------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
 template<class T>
-TVector<T> TVector<T>::operator-(T a)
+TVector<T>::TVector(const TVector<T> &A) 
 {
-	vector[0] = vector[0] - a;
-	return vector;
+  size = A.size;
+  if (size == 0)
+	vector = NULL;
+  else {
+	vector = new T[size];
+	for (int i = 0; i < size; i++)
+	  vector[i] = A.vector[i];
+  }
 }
-// ---------------------------------------------------------------------------
-
-template <class T>
-TVector<T> TVector<T>::operator+(TVector<T> &A)
+//-------------------------------------------------------------------------------------------------
+template<class T>
+TVector<T>::~TVector() 
 {
-	TVector<T> S;
-	if (length == A.length)
-	{
-		if (length == 0)
-			S.vector = 0;
-		else
-		{
-			S.length = length;
-			S.vector = new T[length];
-			for (int i = 0; i < length; i++)
-				S.vector[i] = vector[i] + A.vector[i];
-		}
-	}
-	else
-		throw 1;
-	return S;
+  if (size > 0) {
+	size = 0;
+	delete[] vector;
+	vector = NULL;
+  }
 }
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T> TVector<T>::operator-(TVector<T> &A)
+//-------------------------------------------------------------------------------------------------
+template<class T>
+int TVector<T>::GetSize() const
 {
-	TVector<T> S;
-	if (length == A.length)
-	{
-		if (length == 0)
-			S.vector = 0;
-		else
-		{
-			S.length = length;
-			S.vector = new T[length];
-			for (int i = 0; i < length; i++)
-				S.vector[i] = vector[i] - A.vector[i];
-		}
-	}
-	else
-		throw 1;
-	return S;
+  return size;
 }
-// ---------------------------------------------------------------------------
-template <class T>
-T TVector<T>::operator*(TVector<T> &A)
-{
-	T summ = 0;
-	if (length == A.length)
-	{
-		if (length == 0)
-			return summ;
-		else
-		{
-			for (int i = 0; i < length; i++)
-				summ += vector[i] * A.vector[i];
-		}
-	}
-	else
-		throw 1;
-	return summ;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T> TVector<T>::operator*(T a)
-{
-	TVector<T> S;
-	if (length == 0)
-		S.vector = 0;
-	else
-	{
-		S.length = length;
-		S.vector = new T[length];
-		for (int i = 0; i < length; i++)
-			S.vector[i] = vector[i] * a;
-	}
-	return S;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-int TVector<T>::operator==(TVector<T> &A)
-{
-	int res = 1;
-	if (length != A.length)
-		res = 0;
-	else for (int i = 0; i < length;i++)
-	{
-		if (vector[i] != A.vector[i])
-		{
-			res = 0;
-			break;
-		}
-	}
-	return res;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>& TVector<T>::operator=(TVector<T> &A)
-{
-	if (this != &A)
-	{
-		length = A.length;
-		if (length != 0)
-		{
-			if (vector != 0)
-				delete[]vector;
-			vector = new T[length];
-			for (int i = 0; i < length; i++)
-				vector[i] = A.vector[i];
-		}
-		else
-		{
-			if (vector != 0)
-				delete[]vector;
-			vector = 0;
-		}
-	}
-	return *this;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-T& TVector<T>::GetValue(int i)
-{
-	return vector[i];
-	throw 1;
-}
-// ---------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
 template <class T>
 T& TVector<T>::operator[](int i)
 {
-	if (i >= 0 && i <= length)
-		return vector[i];
-	throw 1;
+  if (i < 0 || i >= size)
+	
+	  throw -1;
+  else 
+	  return vector[i];
 }
-// ---------------------------------------------------------------------------
-template <class T>
-std::istream& operator>>(std::istream &A, TVector<T> &B)
+//-------------------------------------------------------------------------------------------------
+template<class T>
+TVector<T>& TVector<T>::operator=(const TVector<T> &A) 
 {
-	A >> B.length;
-	B.vector = new T[B.length];
-	for (int i = 0; i < B.length; i++)
-	{
-		A >> B.vector[i];
-	}
-	return A;
+  if (this == &A)
+	return *this;
+  delete[] vector;
+  size = A.size;
+  vector = new T[size];
+  for (int i = 0; i < size; i++)
+	(*this)[i] = A.vector[i];
+  return *this;
 }
-// ---------------------------------------------------------------------------
-template <class T>
-std::ostream& operator<<(std::ostream &A, TVector<T> &B)
+//-------------------------------------------------------------------------------------------------
+template<class T>
+TVector<T> TVector<T>::operator+() const 
 {
-	A << B.length << "\n";
-	for (int i = 0; i < B.length; i++)
-		A << B.vector[i] << "\n";
-	return A;
+  TVector<T> res(*this);
+  return res;
 }
-// ---------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
+template<class T>
+TVector<T> TVector<T>::operator-() const 
+{
+  TVector<T> res(size);
+  for (int i = 0; i < size; i++) 
+	res[i] = -vector[i];
+  return res;
+}
+//-------------------------------------------------------------------------------------------------
+template<class T>
+TVector<T> TVector<T>::operator+(const TVector<T> &A) 
+{
+  if (size != A.size)
+	throw 0;
+  TVector<T> res(size);
+  for (int i = 0; i < size; i++)
+	res[i] = (*this)[i] + A.vector[i];
+  return res;
+}
+//-------------------------------------------------------------------------------------------------
+template<class T>
+TVector<T> TVector<T>::operator-(const TVector<T> &A) 
+{
+  if (size != A.size)
+	throw 0;
+  TVector<T> res(size);
+  for (int i = 0; i < size; i++)
+	res[i] = (*this)[i] - A.vector[i];
+  return res;
+}
+//-------------------------------------------------------------------------------------------------
+template<class T>
+T TVector<T>::operator*(const TVector <T> &A) 
+{
+  if (size != A.size)
+	throw 0;
+  T res = 0;
+  for (int i = 0; i < size; i++)
+	res += (*this)[i] * A.vector[i];
+  return res;
+}
+//-------------------------------------------------------------------------------------------------
+template<class T>
+TVector<T> TVector<T>::operator*(T A) 
+{
+  TVector<T> res(size);
+  for (int i = 0; i < size; i++)
+	res[i] = (*this)[i] * A;
+  return res;
+}
+//-------------------------------------------------------------------------------------------------
+template<class FriendT>
+TVector<FriendT> operator*(FriendT a, const TVector<FriendT> &A)
+{
+  TVector<FriendT> res(A.size);
+  for (int i = 0; i < A.size; i++)
+	res[i] = A.vector[i] * a;
+  return res;
+}
+//-------------------------------------------------------------------------------------------------
+template<class T>
+bool TVector<T>::operator==(const TVector<T> &A) 
+{
+  if (size != A.size) 
+	return false;
+  else 
+  {
+	T diff = 0.0001;
+	for (int i = 0; i < size; i++)
+		if ((A.vector[i] - vector[i])|| (vector[i] - A.vector[i]) > diff)
+		return false;
+  }
+  return true;
+}
+//-------------------------------------------------------------------------------------------------
+template<class T>
+TVector<T> TVector<T>::operator++() 
+{
+  for (int i = 0; i < size; i++)
+	vector[i] = vector[i] + 1;
+  return *this;
+}
+//-------------------------------------------------------------------------------------------------
+template<class T>
+TVector<T> TVector<T>::operator++(int) 
+{
+  TVector<T> res(*this);
+  for (int i = 0; i < size; i++)
+	vector[i] = vector[i] + 1;
+  return res;
+}
+//-------------------------------------------------------------------------------------------------
+template<class T>
+TVector<T> TVector<T>::operator--() 
+{
+  for (int i = 0; i < size; i++)
+	vector[i] = vector[i] - 1;
+  return *this;
+}
+//-------------------------------------------------------------------------------------------------
+template<class T>
+TVector<T> TVector<T>::operator--(int) 
+{
+  TVector<T> res(*this);
+  for (int i = 0; i < size; i++)
+	vector[i] = vector[i] - 1;
+  return res;
+}
+//-------------------------------------------------------------------------------------------------
+template<class FriendT>
+istream& operator>>(istream &istr, TVector<FriendT> &A)
+{
+  cout << "\nEnter the " << A.size << " coordinates: ";
+  for (int i = 0; i < A.size; i++)
+	istr >> A.vector[i];
+  return istr;
+}
+//-------------------------------------------------------------------------------------------------
+template<class FriendT>
+ostream& operator<<(ostream &ostr, const TVector<FriendT> &A)
+{
+  for (int i = 0; i < A.size; i++)
+	ostr << A.vector[i] << "\t";
+  return ostr;
+}
+//-------------------------------------------------------------------------------------------------

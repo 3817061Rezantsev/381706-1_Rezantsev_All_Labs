@@ -4,194 +4,127 @@
 #include <math.h>
 #include "../VectorLib/TVector.h"
 using namespace std;
+#define MAX_SIZE 10000;
 template <class T>
-class TMatrix: public TVector<T>
+class TMatrix : public TVector<TVector<T>>
 {
 public:
-	TMatrix();
-	TMatrix(int a);
-	TMatrix(TMatrix &A);
-	T& element(int i, int j);
-	TMatrix(const TVector<TVector<T>> &A);
-	TMatrix<T> operator+(TMatrix<T> &A);
-	TMatrix<T> operator-(TMatrix<T> &A);
-	TMatrix<T> operator*(TMatrix<T> &A);
-	TMatrix<T>& operator=(TMatrix<T> &A);
-	bool operator==(const TMatrix &A);
-	template <class T>
-	friend std::istream& operator>>(std::istream& A, TVector<T>& B);
-	template <class T>
-	friend std::ostream& operator<<(std::ostream& A, TVector<T>& B);
-	};
-template <class T>
-TMatrix<T>::TMatrix()
-{
-	vector = 0;
-	length = 0;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TMatrix<T>::TMatrix(int a)
-{
-	length = a;
-	if (length != 0)
-	{
-		int n = length * (length + 1) / 2;
-		vector = new T[n];
-		for (int i = 0; i < n; i++)
-			vector[i] = 0;
-	}
-}
-// ---------------------------------------------------------------------------
+	TMatrix(int n = 10);
+	TMatrix(const TMatrix &B);
+	TMatrix(const TVector<TVector<T>> &B);
+	bool operator==(const TMatrix &B) const;
+	bool operator!=(const TMatrix &B) const;
+	TMatrix& operator= (TVector<TVector<T>> &B);
+	TMatrix  operator+ (const TMatrix &B);
+	TMatrix  operator- (const TMatrix &B);
+	TMatrix operator*(TMatrix<T> &A);
 
-// ---------------------------------------------------------------------------
+	template <class FriendT> friend istream& operator>>(istream &in, TMatrix<FriendT> &B);
+
+	template <class FriendT> friend ostream & operator<<(ostream &out, const TMatrix<FriendT> &B);
+
+};
+//-------------------------------------------------------------------------------------------------
 template <class T>
-TMatrix<T>::TMatrix(TMatrix &A)
+TMatrix<T>::TMatrix(int n) : TVector<TVector<T>>(n)
 {
-	length = A.length;
-	int n = length * (length + 1) / 2;
-	if (length != 0)
-	{
-		vector = new T[length];
+	int a = MAX_SIZE;
+	if (n < 0 || n > a)
+		throw -1;
+	else
 		for (int i = 0; i < n; i++)
-			vector[i] = A.vector[i];
-	}
+			this->vector[i] = TVector <T>(n - i);
+}
+//-------------------------------------------------------------------------------------------------
+template <class T>
+TMatrix<T>::TMatrix(const TMatrix<T> &B) : TVector<TVector<T>>(B) {}
+//-------------------------------------------------------------------------------------------------
+template <class T>
+TMatrix<T>::TMatrix(const TVector<TVector<T>> &B) : TVector<TVector<T>>(B) {}
+//-------------------------------------------------------------------------------------------------
+template <class T>
+bool TMatrix<T>::operator==(const TMatrix<T> &B) const
+{
+	return TVector<TVector<T>>::operator==(B);
+}
+//-------------------------------------------------------------------------------------------------
+
+template <class T>
+bool TMatrix<T>::operator!=(const TMatrix<T> &B) const
+{
+	return TVector<TVector<T>>::operator!=(B);
+}
+//-------------------------------------------------------------------------------------------------
+template <class T>
+TMatrix<T>& TMatrix<T>::operator=(TVector<TVector<T>> &B)
+{
+	TVector<TVector<T>>::operator=(B);
+	return *this;
+}
+//-------------------------------------------------------------------------------------------------
+template <class T>
+TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &B)
+{
+	if (this->size != B.size)
+		throw 0;
 	else
-		vector = 0;
+		return TVector<TVector<T>> :: operator+(B);
 }
-// ---------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
 template <class T>
-T& TMatrix<T>::element(int i, int j) 
+TMatrix<T> TMatrix<T>::operator-(const TMatrix<T> &B)
 {
-	if ((i > j) || (i >= length) || (j >= length) || (i < 0) || (j < 0))	
-	return vector[i*length - i * (i - 1) / 2 + (j - i)];
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TMatrix<T>::TMatrix(const TVector<TVector<T>> &A) :
-	TVector<TVector<T>>(mt) {}
-// ---------------------------------------------------------------------------
-template <class T>
-TMatrix<T> TMatrix<T>::operator+(TMatrix<T> &A)
-{
-	TMatrix<T>* S = new TMatrix<T>(A.GetLength());
-	int n = A.GetLength() * (A.GetLength() + 1) / 2;
-	for (int i = 0; i < n; i++)
-	{
-		T a = GetValue(i) + A.GetValue(i);
-		S->SetValue(i, a);
-	}
-	
-	return *S;
-}
-// ---------------------------------------------------------------------------
-template <class T> 
-bool TMatrix<T>::operator==(const TMatrix<T> &A) 
-{
-	if (length != A.length)
-		return false;
-	int f = 0;
-	int n = length * (length + 1) / 2;
-	for (int i = 0; i < n; i++)
-		if (vector[i] != A.vector[i])
-			f = 1;
-	if (f == 1)
-		return false;
-	return true;
-} 
-//-----------------------------------------------------------------------------
-template <class T>
-TMatrix<T> TMatrix<T>::operator-(TMatrix<T> &A)
-{
-	TMatrix<T> S;
-	if (length == A.length)
-	{
-		if (length == 0)
-			S.vector = 0;
-		else
-		{
-			S.length = length;
-			int n = length * (length + 1) / 2;
-			S.vector = new T[n];
-			for (int i = 0; i < n; i++)
-				S.vector[i] = vector[i] - A.vector[i];
-		}
-	}
+	if (this->size != B.size)
+		throw 0;
 	else
-		throw 1;
-	return S;
+		return TVector<TVector<T>> :: operator-(B);
 }
-// ---------------------------------------------------------------------------
+
 template <class T>
 TMatrix<T>  TMatrix<T>::operator*(TMatrix<T> &A)
 {
-	TMatrix<T> result(length);
-	for (int i = 0; i < length; ++i)
+	if (size == A.size)
 	{
-		for (int j = i; j < length; ++j)
+		TMatrix<T> B = *this;
+		TMatrix<T> result(size);
+		for (int i = 0; i < size; ++i)
 		{
-			int sum = 0;
-			for (int k = i; k <= j; k++)
+			for (int j = 0; j < size - i; ++j)
 			{
-				sum += element(i, k)*A.element(k, j);
+				int sum = 0;
+				int f = j;
+				for (int k = 0; k <= j; k++)
+				{
+					
+					sum += B[i][k]*A[k][f];
+					f--;
+				}	
+				result[i][j] = sum;
 			}
-			result.element(i, j) = sum;
 		}
+		return result;
 	}
-	return result;
+	else
+		throw 0;
 }
-// ---------------------------------------------------------------------------
-template <class T>
-TMatrix<T>& TMatrix<T>::operator=(TMatrix<T> &A)
+
+//-------------------------------------------------------------------------------------------------
+template <class FriendT>  istream& operator>>(istream &in, TMatrix<FriendT> &B)
 {
-	if (this != &A)
-	{
-		length = A.GetLength();
-		if (length != 0)
-		{
-			if (vector != 0)
-				delete[]vector;
-			int n = length * (length + 1) / 2;
-			vector = new T[n];
-			for (int i = 0; i < n; i++)
-				vector[i] = A.vector[i];
-		}
-		else
-		{
-			if (vector != 0)
-				delete[]vector;
-			vector = 0;
-		}
-	}
-	return *this;
+	for (int i = 0; i < B.size; i++)
+		in >> B.vector[i];
+	return in;
 }
-// ---------------------------------------------------------------------------
-template <class T>
-std::istream& operator>>(std::istream &A, TMatrix<T> &B)
+//-------------------------------------------------------------------------------------------------
+template <class FriendT>  ostream & operator<<(ostream &out, const TMatrix<FriendT> &B)
 {
-	A >> B.GetLength();
-	int n = B.GetLength() * (B.GetLength() + 1) / 2;
-	B.vector = new T[n];
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < B.size; i++)
 	{
-		A >> B.vector[i];
+		for (int j = 0; j < i; j++)
+			out << "\t";
+		out << B.vector[i] << endl;
+	
 	}
-	return A;
+		return out;	
 }
-// ---------------------------------------------------------------------------
-template <class T>
-std::ostream& operator<<(std::ostream &A, TMatrix<T> &B)
-{
-	int a = B.GetLength();
-	printf("%d", a);
-	A << "\n";
-	int n = B.GetLength() * (B.GetLength() + 1) / 2;
-	for (int i = 0; i < n; i++)
-	{
-		int b = B.GetValue(i);
-		cout << b << "\t";
-	}
-		A << "\n";	
-	return A;
-}
-// ---------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
