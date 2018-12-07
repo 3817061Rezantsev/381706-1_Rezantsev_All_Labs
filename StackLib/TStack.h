@@ -21,13 +21,13 @@ TStack<T>::TStack(int n)
 {
 	if (n < 0)
 		throw -1;
-	else if (n = 0)
+	else if (n == 0)
 	{
 		size = 0;
 		r = 0;
 		m = NULL;
 	}
-	else
+	if (n > 0)
 	{
 		r = 0;
 		size = n;
@@ -73,7 +73,7 @@ T TStack<T>::Get()
 template <class T>
 bool TStack<T>::IsFull()
 {
-	if ((r >= size)&&(size!=0))
+	if (((r >= size)&&(size!=0))||(size == 0))
 		return true;
 	else
 		return false;
