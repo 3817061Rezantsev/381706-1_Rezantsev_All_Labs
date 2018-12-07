@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "TStack.h"
+#include "..\StackLib\TStack.h"
 using namespace std;
 template <class T>
 class TQueue :public TStack<T>
@@ -49,7 +49,7 @@ T TQueue<T>::Get()
 
 }
 template <class T>
-TQueue<T>::TQueue(int n) : TStak(n)
+TQueue<T>::TQueue(int n) : TStack(n)
 {
 	if (n < 0)
 		throw - 1;
