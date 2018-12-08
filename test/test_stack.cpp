@@ -11,12 +11,6 @@ TEST(TStack, cannot_create_stack_with_negative_length)
 	ASSERT_ANY_THROW(TStack<int> bf(-3));
 }
 
-TEST(TStack, can_create_stack_from_stack)
-{
-	TStack<int> a(4);
-	ASSERT_NO_THROW(TStack<int> bf(a));
-}
-
 TEST(TStack, can_set_and_get_val)
 {
 	TStack<int> bf(10);
