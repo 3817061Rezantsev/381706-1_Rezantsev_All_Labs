@@ -17,11 +17,10 @@ int main()
 	MS.Print();
 	MS.Put(2, 4);
 	MS.Print();
-	
-		std::cout << "\tMS.Get(2): " << MS.Get(2);
-		std::cout << MS.Get(2);
-		std::cout << MS.Get(2);
-		std::cout << MS.Get(2);
+	std::cout << "\tMS.Get(2): " << MS.Get(2);
+	std::cout << MS.Get(2);
+	std::cout << MS.Get(2);
+	std::cout << MS.Get(2) << endl;
 	
 	}
 	catch (int a) {

@@ -9,7 +9,7 @@ protected:
 	TNode<T>* list;
 public:
 	TList();
-	TList(TList<T> &A);
+	TList(TList<T> &list2);
 	void PutBegin(T A);
 	void PutAfter(T A, TNode<T>* node);
 	void PutEnd(T A);
@@ -17,6 +17,9 @@ public:
 	TNode<T>* Search(T A);
 	void Delete(T A);
 	void Clean();
+	T GetBegin();
+	T GetCurrent(TNode<T>* A);
+	T GetEnd();
 	template <class T> friend ostream & operator<<(ostream &out, const TList<T> &B);
 };
 //-----------------------------------------------------------
@@ -27,21 +30,22 @@ TList<T>::TList()
 }
 //-----------------------------------------------------------
 template <class T>
-TList<T>::TList(TList<T> &A)
+TList<T>::TList(TList<T> &list2)
 {
-	TNode<T>* C = A.list, B;
-	if (A.list == 0)
-		list = 0;
-	else {
-		list = new TNode<T>(*A.list);
-		B = list;
-		while (C->GetNext() != 0)
+	if (list2.list)
+	{
+		list = new TNode<T>(list2.list->data, list2.list);
+		TNode<T> *u = list;
+		TNode<T> *u2 = list2.list->next;
+		while (u2 != NULL)
 		{
-			B->SetNext(new TNode<T>(*(C->GetNext())));
-			C = C->GetNext();
-			B = B->GetNext();
+			u->next = new TNode<T>(u2->data, u2->next);
+			u = u->next;
+			u2 = u2->next;
 		}
 	}
+	else
+		list = list2.list;;
 }
 //-----------------------------------------------------------
 template <class T>
@@ -164,3 +168,52 @@ template <class T> ostream & operator<<(ostream &out, const TList<T> &B)
 	}
 	return out;
 }
+//-----------------------------------------------------------
+template <class T>
+T TList<T>::GetBegin()
+{
+	TList<T> a = *this;
+	int b = a.GetSize();
+	if (b == 0)
+		throw 1;
+	else
+	{
+		TNode<T> *A = list;
+		T temp = list->TNode<T>::GetData();
+		list = list->TNode<T>::GetNext();
+		delete A;
+		return temp;
+	}
+}
+//-----------------------------------------------------------
+template <class T>
+T TList<T>::GetCurrent(TNode<T>* A)
+{
+	if (A && list)
+	{
+		T temp = list->TNode<T>::GetData();
+		list = list->TNode<T>::GetNext();
+		return temp;
+	}
+	else
+		if (list == NULL)
+			throw 1;
+}
+//-----------------------------------------------------------
+template <class T>
+T TList<T>::GetEnd()
+{
+	if (list != 0)
+	{
+		TNode<T> *B = list;
+
+		while (B->GetNext() != 0)
+			B = B->GetNext();
+		T temp = list->TNode<T>::GetData();
+		list = list->TNode<T>::GetNext();
+		return temp;
+	}
+	else
+		throw 1;
+}
+//-----------------------------------------------------------
