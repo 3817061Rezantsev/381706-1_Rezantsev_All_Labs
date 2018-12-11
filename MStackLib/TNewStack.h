@@ -1,29 +1,46 @@
 #pragma once
+#include "..\StackLib\TStack.h"
+
+
 template <class T>
-class TNewStack {
-	int size;
-	T* top;
-	T* mas;
+class TNewStack :public TStack<T> {
 public:
-	TNewStack(int n, T* m)
+	TNewStack(int _size = 0, T* mas = 0) : TStack(_size)
 	{
-		size = n;
-		top = 0;
-		mas = m;
+		TStack<T>::size = _size;
+		TStack<T>::r = 0;
+		if (mas == 0) TStack<T>::m = 0;
+		else
+			TStack<T>::m = mas;
 	}
-	TNewStack(TNewStack &A)
+	//-------------------------------------------------------------------------------------------------
+	TNewStack(TNewStack <T> &A) : TStack(A)
 	{
-		size = A.size;
-		top = A.top;
-		mas = A.mas;
+		TStack<T>::size = A.TStack<T>::size;
+		TStack<T>::r = A.TStack<T>::r;
+		if (A.TStack<T>::m == 0) TStack<T>::m = 0;
+		else
+			TStack<T>::m = A.TStack<T>::m;
 	}
-	int Free()
+	//-------------------------------------------------------------------------------------------------
+	int CountFree()
 	{
-		return size - top;
+		return (TStack<T>::size - TStack<T>::r);
 	}
-	void SetMas(int n, T* m)
+	//-------------------------------------------------------------------------------------------------
+	int GetSize()
 	{
-		size = n;
-		mas = m;
+		return TStack<T>::size;
+	}
+	//-------------------------------------------------------------------------------------------------
+	int GetTop()
+	{
+		return TStack<T>::r;
+	}
+	//-------------------------------------------------------------------------------------------------
+	void SetMas(int _size, T* mas)
+	{
+		TStack<T>::size = _size;
+		TStack<T>::m = mas;
 	}
 };
