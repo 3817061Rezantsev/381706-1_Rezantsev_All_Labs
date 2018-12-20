@@ -1,107 +1,175 @@
 #pragma once
-#include <iostream>
-#include "..\StackLib\TStack.h"
-using namespace std;
+
 template <class T>
-class TQueue :public TStack<T>
+class TArrayList
 {
-protected:
-	int start;
-	int count;
 public:
-	TQueue(int n);
-	TQueue(TQueue<T> &A);
-	void Put(T A);
-	T Get();
-	bool IsFull();
+	int size, count, start;
+	T* mas;
+	int *index;
+public:
+	TArrayList(int n = 1);
+	TArrayList(TArrayList<T> &A);
+	bool IsFul();
 	bool IsEmpty();
+	void PutStart(T B);
+	void PutEnd(T B);
+	T GetStart();
+	T GetEnd();
 };
-//-------------------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------
 template <class T>
-bool TQueue<T>::IsEmpty()
+TArrayList<T>::TArrayList(int n)
+{
+	if (n <= 0)
+		throw -1;
+	else
+	{
+		size = n;
+		count = 0;
+		start = -1;
+		mas = new T[size];
+		index = new int[size];
+		for (int i = 0; i < size; i++)
+			index[i] = -2;
+	}
+}
+//---------------------------------------------------------------------
+template <class T>
+bool TArrayList<T>::IsEmpty()
 {
 	if (count == 0)
 		return true;
 	else
 		return false;
 }
-//-------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------
 template <class T>
-bool TQueue<T>::IsFull()
+bool TArrayList<T>::IsFul()
 {
 	if (count == size)
 		return true;
 	else
 		return false;
 }
-//-------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------
 template <class T>
-T TQueue<T>::Get()
+TArrayList<T>::TArrayList(TArrayList<T> &A)
 {
-	if (IsEmpty())
-		throw 1;
-	else 
+	start = A.start;
+	size = A.size;
+	count = A.count;
+	if (size <= 0)
+		throw -1;
+	else
 	{
-		T res = m[start];
-		start++;
-		count--;
-		if (start > size - 1)
-			start = 0;
-		return res;
+		mas = new T[size];
+		index = new int[size];
+	}
+	for (int i = 0; i < size; i++)
+	{
+		mas[i] = A.mas[i];
+		index[i] = A.index[i];
 	}
 
 }
-//-------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------
 template <class T>
-TQueue<T>::TQueue(int n) : TStack(n)
+void TArrayList<T>::PutStart(T B)
 {
-	if (n < 0)
-		throw - 1;
-	else if (n == 0)
-	{
-		start = 0;
-		size = 0;
-		count = 0;
-		r = 0;
-		m = 0;
-	}
-	if (n > 0)
-	{
-		start = 0;
-		count = 0;
-		size = n;
-		m = new T[size];
-		for (int i = 0; i < size; i++)
-			m[i] = 0;
-	}
-}
-//-------------------------------------------------------------------------------------------------
-template <class T>
-TQueue<T>::TQueue(TQueue<T> &A)
-{
-	start = A.start;
-	count = A.count;
-	r = A.r;
-	if (size == 0)
-		m = 0;
+	if (IsFul())
+		throw -1;
 	else
 	{
-		m = new T[size];
-		for (int i = 0; i < size;i++)
-			m[i] = A.m[i];
+		for (int i = 0; i < size; i++)
+			if (index[i] == -2)
+			{
+				index[i] = start;
+				mas[i] = B;
+				start = i;
+				count++;
+				break;
+			}
 	}
 }
-//-------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------
 template <class T>
-void TQueue<T>::Put(T A)
+void TArrayList<T>::PutEnd(T B)
 {
-	if (IsFull())
-		throw 0;
-	else 
+	if (IsFul())
+		throw -1;
+	else
+		for (int i = 0; i < size; i++)
+			if (index[i] == -2)
+			{
+				mas[i] = B;
+				int f = 0;
+				for (int j = 0; j < size; j++)
+				{
+					if (index[j] == -1)
+					{
+						index[j] = i;
+						index[i] = -1;
+						break;
+					}
+					f++;
+				}
+				if (f == size)
+				{
+					index[i] = -1;
+					start = i;
+				}
+				count++;
+				break;
+			}
+}
+//---------------------------------------------------------------------
+template <class T>
+T TArrayList<T>::GetStart()
+{
+	if (IsEmpty())
+		throw -1;
+	else
 	{
-		m[r++] = A;
-		count++;
-		if (r > size - 1)
-			r = 0;
+		T temporary = mas[start];
+		int _Start = index[start];
+		index[start] = -2;
+		start = _Start;
+		count--;
+		return temporary;
 	}
 }
+//---------------------------------------------------------------------
+template <class T>
+T TArrayList<T>::GetEnd()
+{
+	if (IsEmpty())
+		throw -1;
+	else
+	{
+		
+		for (int i = 0;i < size;i++)
+		{
+			if (index[i] == -1)
+			{
+				int max = -2;
+				int f = 0;
+				for (int j = 0;j < size;j++)
+				{
+					if (max < index[j]) 
+					{
+						max = index[j];
+						f = j;
+					}
+				}
+				index[f] = -1;
+				index[i] = -2;
+				count--;
+				return mas[i];
+			}
+		}
+		
+	}
+}
+//---------------------------------------------------------------------

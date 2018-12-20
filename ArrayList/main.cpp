@@ -1,30 +1,38 @@
 #include <iostream>
-#include "TQueue.h"
+#include "TAList.h"
 using namespace std;
 void main() 
 {
 	try
 	{
 	setlocale(LC_ALL, "Russian");
-	TQueue<int> st(5);
-	int temp;
 	cout << "Тестирование программ поддержки структуры типа очереди" << endl;
-	for (int i = 0; i < 5; i++) {
-		st.Put(i);
-		cout << "Положили значение " << i << endl;
-	}
-	while (!st.IsEmpty()) {
-		temp = st.Get();
-		cout << "Взяли значение " << temp << endl;
-	}
+	TArrayList <int> L1(5);
+	L1.PutStart(60);
+	L1.PutStart(40);
+	std::cout << "Положили в начало списка 60, потом 40\n";
+	std::cout << "Взяли первое значение\n";
+	std::cout << L1.GetStart() << "\n";
+	std::cout << "Взяли первое значение\n";
+	std::cout << L1.GetStart() << "\n";
+	
+	L1.PutEnd(60);
+	L1.PutEnd(40);
+	std::cout << "Положили в конец списка 60, потом 40\n";
+	std::cout << "Взяли первое значение\n";
+	std::cout << L1.GetStart() << "\n";
+	std::cout << "Взяли первое значение\n";
+	std::cout << L1.GetStart() << "\n";
+	
+	L1.PutEnd(60);
+	L1.PutEnd(40);
+	std::cout << "Положили в конец списка 60, потом 40\n";
+	std::cout << "Взяли последнее значение\n";
+	std::cout << L1.GetEnd() << "\n";
 	}
 	catch (int a)
 	{
 		if (a == -1)
-			cout << "n < 0" << "\n";
-		if (a == 0)
-			cout << "IsFull" << "\n";
-		if (a == 1)
-			cout << "IsEmpty" << "\n";
+			cout << "JustAnError" << "\n";
 	}
 }
