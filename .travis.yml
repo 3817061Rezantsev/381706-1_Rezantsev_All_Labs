@@ -6,8 +6,12 @@ before_script:
   - mkdir ../build
   - cd ../build
 script:
-  - cmake ../381706-1_Rezantsev_All_Labs
+  - cmake ../381706-1_Mityagina_AllLabs
   - make -j
-  - ./381706-1_Rezantsev_All_Labs
+  - ./Vector/Vector
+  - ./VectorLib/VectorLib
+  - ./Matrix/Matrix
+  - ./MatrixLib/MatrixLib
+  - ./test/test
 notifications:
   email: false
