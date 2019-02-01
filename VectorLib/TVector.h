@@ -15,7 +15,8 @@ public:
 
   int GetSize() const;
   T& operator[](int i);
-  bool operator==(const TVector<T> &A);
+  bool operator==(const TVector<T> &A) const;
+	bool operator !=(const TVector &v) const;
   TVector& operator=(const TVector<T> &A);
 
   TVector operator++();
@@ -174,19 +175,36 @@ TVector<FriendT> operator*(FriendT a, const TVector<FriendT> &A)
   return res;
 }
 //-------------------------------------------------------------------------------------------------
-template<class T>
-bool TVector<T>::operator==(const TVector<T> &A) 
+template <class T>
+bool TVector<T>::operator!=(const TVector<T> &A) const
 {
-  if (size != A.size) 
-	return false;
-  else 
-  {
-	T diff = 0.0001;
-	for (int i = 0; i < size; i++)
-		if ((A.vector[i] - vector[i])|| (vector[i] - A.vector[i]) > diff)
+	if (*this == A)
+	{
 		return false;
-  }
-  return true;
+	}
+	else
+		return true;
+
+}
+//-------------------------------------------------------------------------------------------------
+template <class T>
+bool TVector<T>::operator==(const TVector<T> &A) const
+{
+	if (this->size == A.size)
+	{
+		bool flag = true;
+		for (int i = 0; i < size; i++)
+		{
+			if (this->vector[i] != A.vector[i])
+			{
+				flag = false;
+				break;
+			}
+		}
+		return flag;
+	}
+	else
+		return false;
 }
 //-------------------------------------------------------------------------------------------------
 template<class T>
