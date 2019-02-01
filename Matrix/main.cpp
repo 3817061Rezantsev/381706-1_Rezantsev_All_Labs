@@ -2,7 +2,7 @@
 #include "../MatrixLib/TMatrix.h"
 #include <time.h>
 using namespace std;
-void main()
+int main()
 {
 	double t1, t2, startMult, endMult, startDel, endDel;
 	cout << "An example of using the Matrix will be implemented here" << endl;
@@ -34,4 +34,5 @@ void main()
 	cout << endl;
 	cout << "DelTime = " << t2;
 	cout << endl;
+	return 0;
 }

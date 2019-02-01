@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../VectorLib/TVector.h"
-void main()
+int main()
 {
-
+	return 0;
 }
