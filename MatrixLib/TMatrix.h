@@ -7,15 +7,15 @@
 using namespace std;
 #define MAX_SIZE 10000;
 template <class T>
-class TMatrix : public TVector<TVector<T>>
+class TMatrix : public TVector<TVector<T> >
 {
 public:
 	TMatrix(int n = 10);
 	TMatrix(const TMatrix &B);
-	TMatrix(const TVector<TVector<T>> &B);
+	TMatrix(const TVector<TVector<T> > &B);
 	bool operator==(const TMatrix &B) const;
 	bool operator!=(const TMatrix &B) const;
-	TMatrix& operator= (TVector<TVector<T>> &B);
+	TMatrix& operator= (TVector<TVector<T> > &B);
 	TMatrix  operator+ (const TMatrix &B);
 	TMatrix  operator- (const TMatrix &B);
 	TMatrix operator*(TMatrix<T> &A);
@@ -28,7 +28,7 @@ public:
 };
 //-------------------------------------------------------------------------------------------------
 template <class T>
-TMatrix<T>::TMatrix(int n) : TVector<TVector<T>>(n)
+TMatrix<T>::TMatrix(int n) : TVector<TVector<T> >(n)
 {
 	int a = MAX_SIZE;
 	if (n < 0 || n > a)
@@ -39,28 +39,28 @@ TMatrix<T>::TMatrix(int n) : TVector<TVector<T>>(n)
 }
 //-------------------------------------------------------------------------------------------------
 template <class T>
-TMatrix<T>::TMatrix(const TMatrix<T> &B) : TVector<TVector<T>>(B) {}
+TMatrix<T>::TMatrix(const TMatrix<T> &B) : TVector<TVector<T> >(B) {}
 //-------------------------------------------------------------------------------------------------
 template <class T>
-TMatrix<T>::TMatrix(const TVector<TVector<T>> &B) : TVector<TVector<T>>(B) {}
+TMatrix<T>::TMatrix(const TVector<TVector<T> > &B) : TVector<TVector<T> >(B) {}
 //-------------------------------------------------------------------------------------------------
 template <class T>
 bool TMatrix<T>::operator==(const TMatrix<T> &B) const
 {
-	return TVector<TVector<T>>::operator==(B);
+	return TVector<TVector<T> >::operator==(B);
 }
 //-------------------------------------------------------------------------------------------------
 
 template <class T>
 bool TMatrix<T>::operator!=(const TMatrix<T> &B) const
 {
-	return TVector<TVector<T>>::operator!=(B);
+	return TVector<TVector<T> >::operator!=(B);
 }
 //-------------------------------------------------------------------------------------------------
 template <class T>
-TMatrix<T>& TMatrix<T>::operator=(TVector<TVector<T>> &B)
+TMatrix<T>& TMatrix<T>::operator=(TVector<TVector<T> > &B)
 {
-	TVector<TVector<T>>::operator=(B);
+	TVector<TVector<T> >::operator=(B);
 	return *this;
 }
 //-------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &B)
 	if (this->size != B.size)
 		throw TException("Different dimensions.");
 	else
-		return TVector<TVector<T>> :: operator+(B);
+		return TVector<TVector<T> > :: operator+(B);
 }
 //-------------------------------------------------------------------------------------------------
 template <class T>
@@ -79,7 +79,7 @@ TMatrix<T> TMatrix<T>::operator-(const TMatrix<T> &B)
 	if (this->size != B.size)
 		throw TException("Different dimensions.");
 	else
-		return TVector<TVector<T>> :: operator-(B);
+		return TVector<TVector<T> > :: operator-(B);
 }
 
 template <class T>
