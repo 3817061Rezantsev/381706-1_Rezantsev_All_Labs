@@ -21,8 +21,6 @@ int main()
 	startMult = clock();
 	Res4 = M1 * M2;
 	t1 = (clock() - startMult) / CLOCKS_PER_SEC;
-	cout << "An example of using cin and cout" << endl;
-	cin >> M6;
 	cout << M6 << endl;
 	cout << "M1/n" << endl << M1 << endl;
 	cout << "M2/n" << endl << M2 << endl;
