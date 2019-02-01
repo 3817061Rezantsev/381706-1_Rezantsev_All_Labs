@@ -6,7 +6,7 @@ before_script:
   - mkdir ../build
   - cd ../build
 script:
-  - cmake ../381706-1_Mityagina_AllLabs
+  - cmake ../381706-1_Rezantsev_All_Labs
   - make -j
   - ./Vector/Vector
   - ./VectorLib/VectorLib
