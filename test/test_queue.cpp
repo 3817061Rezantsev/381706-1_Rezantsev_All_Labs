@@ -1,4 +1,4 @@
-#include "..\QueueLib\TQueue.h"
+#include "../QueueLib/TQueue.h"
 #include "TStack.h"
 #include <gtest.h>
 
