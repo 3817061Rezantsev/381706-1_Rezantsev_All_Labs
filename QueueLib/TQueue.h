@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "../Exception/Exception.h"
-#include "TStack.h"
+#include "../StackLib/TStack.h"
 using namespace std;
 template <class T>
 class TQueue :public TStack<T>
@@ -30,7 +30,7 @@ bool TQueue<T>::IsEmpty()
 template <class T>
 bool TQueue<T>::IsFull()
 {
-	if (count == size)
+	if (count == this->size)
 		return true;
 	else
 		return false;
@@ -43,10 +43,10 @@ T TQueue<T>::Get()
 		throw TException("Error.Queue is empty");
 	else 
 	{
-		T res = m[start];
+		T res = this->m[start];
 		start++;
 		count--;
-		if (start > size - 1)
+		if (start > this->size - 1)
 			start = 0;
 		return res;
 	}
@@ -63,17 +63,17 @@ TQueue<T>::TQueue(int n) : TStack(n)
 		start = 0;
 		size = 0;
 		count = 0;
-		r = 0;
-		m = 0;
+		this->r = 0;
+		this->m = 0;
 	}
 	if (n > 0)
 	{
 		start = 0;
 		count = 0;
-		size = n;
-		m = new T[size];
-		for (int i = 0; i < size; i++)
-			m[i] = 0;
+		this->size = n;
+		this->m = new T[this->size];
+		for (int i = 0; i < this->size; i++)
+			this->m[i] = 0;
 	}
 }
 //-------------------------------------------------------------------------------------------------
@@ -82,14 +82,14 @@ TQueue<T>::TQueue(TQueue<T> &A)
 {
 	start = A.start;
 	count = A.count;
-	r = A.r;
-	if (size == 0)
-		m = 0;
+	this->r = A.r;
+	if (this->size == 0)
+		this->m = 0;
 	else
 	{
-		m = new T[size];
-		for (int i = 0; i < size;i++)
-			m[i] = A.m[i];
+		this->m = new T[this->size];
+		for (int i = 0; i < this->size;i++)
+			this->m[i] = A.m[i];
 	}
 }
 //-------------------------------------------------------------------------------------------------
@@ -100,9 +100,9 @@ void TQueue<T>::Put(T A)
 		throw TException("Error. Queue is full.");
 	else 
 	{
-		m[r++] = A;
+		this->m[this->r++] = A;
 		count++;
-		if (r > size - 1)
-			r = 0;
+		if (this->r > this->size - 1)
+			this->r = 0;
 	}
 }

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "TQueue.h"
+#include "../QueueLib/TQueue.h"
 using namespace std;
 int main() 
 {
