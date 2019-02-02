@@ -14,13 +14,11 @@ if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
 endif()
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gtest)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gtest ${CMAKE_CURRENT_SOURCE_DIR}/StackLib)
 add_subdirectory(gtest)
 add_subdirectory(test)
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StackLib)
-add_subdirectory(Stack)
 add_subdirectory(StackLib)
+
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/QueueLib)
 add_subdirectory(Queue)
@@ -32,6 +30,6 @@ add_subdirectory(Exception)
 
 #target_link_libraries(${Vector} ${VectorLib} ) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
 
-#target_link_libraries(${Stack} ${StackLib} )
+
 #target_link_libraries(${Queue} ${StackLib} )
 #target_link_libraries(${Queue} ${QueueLib} )

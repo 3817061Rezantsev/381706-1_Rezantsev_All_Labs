@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "../Exception/Exception.h"
-#include "../StackLib/TStack.h"
+#include "TStack.h"
 using namespace std;
 template <class T>
 class TQueue :public TStack<T>
