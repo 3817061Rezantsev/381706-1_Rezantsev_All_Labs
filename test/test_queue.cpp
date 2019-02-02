@@ -86,7 +86,9 @@ TEST(Queue, correct_order_of_return_values)
 	Q.Put(5);
 	Q.Put(4);
 	Q.Put(3);
-	ASSERT_EQ(5, Q.Get());
+	Q.Get();
+	Q.Put(5);
 	ASSERT_EQ(4, Q.Get());
 	ASSERT_EQ(3, Q.Get());
+	ASSERT_EQ(5, Q.Get());
 }

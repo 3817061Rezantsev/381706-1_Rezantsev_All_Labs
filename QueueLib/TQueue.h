@@ -54,14 +54,14 @@ T TQueue<T>::Get()
 }
 //-------------------------------------------------------------------------------------------------
 template <class T>
-TQueue<T>::TQueue(int n) : TStack(n)
+TQueue<T>::TQueue(int n) : TStack<T>(n)
 {
 	if (n < 0)
 		throw TException("Error. Wrong size");
 	else if (n == 0)
 	{
 		start = 0;
-		size = 0;
+		this->size = 0;
 		count = 0;
 		this->r = 0;
 		this->m = 0;
@@ -78,10 +78,11 @@ TQueue<T>::TQueue(int n) : TStack(n)
 }
 //-------------------------------------------------------------------------------------------------
 template <class T>
-TQueue<T>::TQueue(TQueue<T> &A)
+TQueue<T>::TQueue(TQueue<T> &A) : TStack<T>(A)
 {
 	start = A.start;
 	count = A.count;
+	this->size = A.size;
 	this->r = A.r;
 	if (this->size == 0)
 		this->m = 0;
