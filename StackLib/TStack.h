@@ -47,7 +47,7 @@ TStack<T>::TStack(TStack<T> &A)
 	else
 	{
 		m = new T[size];
-		for (int i = 0; i < size; r++)
+		for (int i = 0; i < size; i++)
 			m[i] = A.m[i];
 	}
 }

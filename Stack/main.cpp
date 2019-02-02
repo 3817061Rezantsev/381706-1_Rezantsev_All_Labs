@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../StackLib/TStack.h"
+#include "TStack.h"
 using namespace std;
 int main()
 {
@@ -15,4 +15,5 @@ int main()
 	cout << "Put 8" << endl;
 	cout << "Get val" << endl;
 	cout << b << "\n";
+
 }

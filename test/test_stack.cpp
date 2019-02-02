@@ -1,6 +1,6 @@
-#include "..\StackLib\TStack.h"
+#include "TStack.h"
 
-#include "../gtest/gtest.h"
+#include "gtest.h"
 TEST(TStack, can_create_stack_with_positive_length)
 {
 	ASSERT_NO_THROW(TStack<int> bf(3));
@@ -30,14 +30,14 @@ TEST(TStack, cannot_set_full_stack)
 	ASSERT_ANY_THROW(bf.Put(1));
 }
 
-TEST(TQueue, can_copy_stack)
+TEST(TStack, can_copy_stack)
 {
 	TStack<int> S(3);
 	S.Put(3);
 	ASSERT_NO_THROW(TStack<int> S1(S));
 }
 
-TEST(Stack, correct_order_of_return_values)
+TEST(TStack, correct_order_of_return_values)
 {
 	TStack <int> S(3);
 	S.Put(3);
@@ -48,13 +48,13 @@ TEST(Stack, correct_order_of_return_values)
 	ASSERT_EQ(3, S.Get());
 }
 
-TEST(Stack, is_full_false)
+TEST(TStack, is_full_false)
 {
 	TStack <int> S(3);
 	ASSERT_FALSE(S.IsFull());
 }
 
-TEST(Stack, is_full_true)
+TEST(TStack, is_full_true)
 {
 	TStack <int> S(3);
 	S.Put(3);
@@ -63,7 +63,7 @@ TEST(Stack, is_full_true)
 	ASSERT_TRUE(S.IsFull());
 }
 
-TEST(Stack, is_empty_false)
+TEST(TStack, is_empty_false)
 {
 	TStack <int> S(3);
 	S.Put(3);
@@ -71,7 +71,7 @@ TEST(Stack, is_empty_false)
 	ASSERT_FALSE(S.IsEmply());
 }
 
-TEST(Stack, is_empty_true)
+TEST(TStack, is_empty_true)
 {
 	TStack <int> S(3);
 	ASSERT_TRUE(S.IsEmply());
