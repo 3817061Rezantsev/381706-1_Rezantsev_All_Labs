@@ -8,7 +8,7 @@ before_script:
 script:
   - cmake ../381706-1_Rezantsev_All_Labs
   - make -j
-   - ./Stack/Stack
+  - ./Stack/Stack
   - ./test/test
 notifications:
   email: false
