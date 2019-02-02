@@ -8,6 +8,7 @@ before_script:
 script:
   - cmake ../381706-1_Rezantsev_All_Labs
   - make -j
-  - ./381706-1_Rezantsev_All_Labs
+  - ./Queue/Queue
+  - ./test/test
 notifications:
   email: false

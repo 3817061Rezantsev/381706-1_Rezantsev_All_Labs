@@ -64,7 +64,7 @@ TEST(TQueue, can_check_queue_is_full)
 	EXPECT_EQ(p.IsFull(), 1);
 }
 
-TEST(TQueue, can_not_qet_elem_from_empty_queue)
+TEST(TQueue, can_not_get_elem_from_empty_queue)
 {
 	TQueue<int> p(2);
 	p.Put(1);
@@ -78,4 +78,15 @@ TEST(TQueue, can_not_put_elem_in_full_queue)
 	p.Put(1);
 	p.Put(2);
 	ASSERT_ANY_THROW(p.Put(3));
+}
+
+TEST(Queue, correct_order_of_return_values)
+{
+	TQueue <int> Q(3);
+	Q.Put(5);
+	Q.Put(4);
+	Q.Put(3);
+	ASSERT_EQ(5, Q.Get());
+	ASSERT_EQ(4, Q.Get());
+	ASSERT_EQ(3, Q.Get());
 }
