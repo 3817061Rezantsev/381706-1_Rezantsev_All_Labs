@@ -23,7 +23,7 @@ public:
 	T GetEnd();
 	bool IsFull();
 	bool IsEmpty();
-	template <class T> friend ostream & operator<<(ostream &out, const TList<T> &B);
+	template <class Tfriend> friend ostream & operator<<(ostream &out, const TList<Tfriend> &B);
 };
 //-----------------------------------------------------------
 template <class T>
@@ -166,9 +166,9 @@ void TList<T>::Clean()
 	}
 }
 //-----------------------------------------------------------
-template <class T> ostream & operator<<(ostream &out, const TList<T> &B)
+template <class Tfriend> ostream & operator<<(ostream &out, const TList<Tfriend> &B)
 {
-	TNode<T> * u = B.list;
+	TNode<Tfriend> * u = B.list;
 	while (u)
 	{
 		out << u->data << " ";
