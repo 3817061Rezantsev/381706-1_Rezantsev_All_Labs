@@ -6,7 +6,7 @@ public:
 	T data;
 	TNode<T>* next;
 public:
-	TNode(T d = 0, TNode<T>* n = NULL)
+	TNode(T d = 0, TNode<T>* n = 0)
 	{
 		data = d;
 		next = n;
@@ -14,7 +14,7 @@ public:
 	TNode(const TNode<T> &A)
 	{
 		data = A.data;
-		next = NULL;
+		next = 0;
 	}
 	T GetData()
 	{

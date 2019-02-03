@@ -29,7 +29,7 @@ public:
 template <class T>
 TList<T>::TList()
 {
-	list = NULL;
+	list = 0;
 }
 //-----------------------------------------------------------
 template <class T>
@@ -40,7 +40,7 @@ TList<T>::TList(TList<T> &list2)
 		list = new TNode<T>(list2.list->data, list2.list);
 		TNode<T> *u = list;
 		TNode<T> *u2 = list2.list->next;
-		while (u2 != NULL)
+		while (u2 != 0)
 		{
 			u->next = new TNode<T>(u2->data, u2->next);
 			u = u->next;
@@ -58,7 +58,7 @@ void TList<T>::PutBegin(T A)
 		throw TException("Error. List is full");
 	if (list == 0)
 	{
-		TNode<T>* temp = new TNode<T>(A, NULL);
+		TNode<T>* temp = new TNode<T>(A, 0);
 		list = temp;
 	}
 	else
@@ -92,10 +92,10 @@ void TList<T>::PutEnd(T A)
 		TNode<T> *B = list;
 		while (B->GetNext() != 0)
 			B = B->GetNext();
-		B->SetNext(new TNode<T>(A, NULL));
+		B->SetNext(new TNode<T>(A, 0));
 	}
 	else
-		list = new TNode<T>(A, NULL);
+		list = new TNode<T>(A, 0);
 }
 //-----------------------------------------------------------
 template <class T>
@@ -145,7 +145,7 @@ TNode<T>* TList<T>::Search(T A)
 			return u;
 		u = u->GetNext();
 	}
-	return NULL;
+	return 0;
 }
 //-----------------------------------------------------------
 template <class T>
@@ -153,16 +153,16 @@ void TList<T>::Clean()
 {
 	TNode<T>* u = list;
 	TNode<T>* u2;
-	if (u != NULL)
+	if (u != 0)
 	{
-		while (u->next != NULL)
+		while (u->next != 0)
 		{
 			u2 = u->next;
 			delete u;
 			u = u2;
 		}
 		delete u;
-		list = NULL;
+		list = 0;
 	}
 }
 //-----------------------------------------------------------
@@ -249,7 +249,7 @@ bool TList<T>::IsFull()
 	try
 	{
 		TNode<T>* a = new TNode<T>();
-		if (a == NULL)
+		if (a == 0)
 			return 1;
 		else
 		{
