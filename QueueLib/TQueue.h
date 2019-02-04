@@ -56,25 +56,8 @@ T TQueue<T>::Get()
 template <class T>
 TQueue<T>::TQueue(int n = 0) : TStack<T>(n)
 {
-	if (n < 0)
-		throw TException("Error. Wrong size");
-	else if (n == 0)
-	{
-		start = 0;
-		this->size = 0;
-		count = 0;
-		this->r = 0;
-		this->m = 0;
-	}
-	if (n > 0)
-	{
-		start = 0;
-		count = 0;
-		this->size = n;
-		this->m = new T[this->size];
-		for (int i = 0; i < this->size; i++)
-			this->m[i] = 0;
-	}
+	start = 0;
+	count = 0;
 }
 //-------------------------------------------------------------------------------------------------
 template <class T>

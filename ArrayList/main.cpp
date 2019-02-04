@@ -13,8 +13,6 @@ int main()
 	std::cout << L1.GetStart() << "\n";
 	std::cout << "Взяли первое значение\n";
 	std::cout << L1.GetStart() << "\n";
-
-	
 	L1.PutEnd(60);
 	L1.PutEnd(40);
 	std::cout << "Положили в конец списка 60, потом 40\n";
