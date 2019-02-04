@@ -54,7 +54,7 @@ T TQueue<T>::Get()
 }
 //-------------------------------------------------------------------------------------------------
 template <class T>
-TQueue<T>::TQueue(int n = 0) : TStack<T>(n)
+TQueue<T>::TQueue(int n) : TStack<T>(n)
 {
 	start = 0;
 	count = 0;
