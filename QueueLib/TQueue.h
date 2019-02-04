@@ -10,6 +10,7 @@ protected:
 	int start;
 	int count;
 public:
+	TQueue();
 	TQueue(int n);
 	TQueue(TQueue<T> &A);
 	void Put(T A);
@@ -55,6 +56,13 @@ T TQueue<T>::Get()
 //-------------------------------------------------------------------------------------------------
 template <class T>
 TQueue<T>::TQueue(int n) : TStack<T>(n)
+{
+	start = 0;
+	count = 0;
+}
+//-------------------------------------------------------------------------------------------------
+template <class T>
+TQueue<T>::TQueue() : TStack<T>(0)
 {
 	start = 0;
 	count = 0;

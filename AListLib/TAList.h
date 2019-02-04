@@ -50,7 +50,7 @@ TAList<T>::TAList(int _size) : freeElem(_size)
 //-------------------------------------------------------------------------------------------------
 
 template <class T>
-TAList<T>::TAList(TAList<T> &A) : freeElem(A.freeElem.size)
+TAList<T>::TAList(TAList<T> &A)
 {
 	start = A.start;
 	end = A.end;
