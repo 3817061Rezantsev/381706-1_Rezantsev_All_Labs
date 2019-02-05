@@ -27,7 +27,7 @@ TStack<T>::TStack(int n)
 	{
 		size = 0;
 		r = 0;
-		m = NULL;
+		m = 0;
 	}
 	if (n > 0)
 	{
@@ -43,12 +43,15 @@ TStack<T>::TStack(TStack<T> &A)
 	size = A.size;
 	r = A.r;
 	if (size == 0)
-		m = NULL;
+		m = 0;
 	else
 	{
 		m = new T[size];
-		for (int i = 0; i < size; i++)
-			m[i] = A.m[i];
+		if (A.m != 0)
+			for (int i = 0; i < size; i++)
+				m[i] = A.m[i];
+		else
+			m = 0;
 	}
 }
 //-------------------------------------------------------------------------------------------------
