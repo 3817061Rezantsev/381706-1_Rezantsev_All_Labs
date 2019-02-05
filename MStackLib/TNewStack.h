@@ -5,7 +5,7 @@
 template <class T>
 class TNewStack :public TStack<T> {
 public:
-	TNewStack(int _size = 0, T* mas = 0);
+	TNewStack(int _size, T* mas);
 	TNewStack(TNewStack <T> &A);
 	int CountFree();
 	int GetSize();
@@ -13,7 +13,7 @@ public:
 	void SetMas(int _size, T* mas);
 };
 template <class T>
-TNewStack<T>::TNewStack(int _size = 0, T* mas = 0) : TStack(_size)
+TNewStack<T>::TNewStack(int _size, T* mas) : TStack<T>(_size)
 {
 	if (_size <= 0)
 		throw TException("Error. Negative size");
@@ -25,7 +25,7 @@ TNewStack<T>::TNewStack(int _size = 0, T* mas = 0) : TStack(_size)
 }
 //------------------------------------------------------------------------------------------------
 template <class T>
-TNewStack<T>::TNewStack(TNewStack <T> &A) : TStack(A)
+TNewStack<T>::TNewStack(TNewStack <T> &A) : TStack<T>(A)
 {
 	TStack<T>::size = A.TStack<T>::size;
 	TStack<T>::r = A.TStack<T>::r;
