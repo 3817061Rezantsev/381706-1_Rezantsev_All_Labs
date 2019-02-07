@@ -7,19 +7,20 @@ set (Polinom Polinom)
 set (PolinomLib PolinomLib)
 set (Monom Monom)
 set (MonomLib MonomLib)
-set(Exception Exception)
+set (Exception Exception)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
 endif()
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MonomLib
-${CMAKE_CURRENT_SOURCE_DIR}/gtest)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MonomLib)
 add_subdirectory(Monom)
+add_subdirectory(MonomLib)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolinomLib)
 add_subdirectory(gtest)
 add_subdirectory(test)
-add_subdirectory(MonomLib)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolinomLib)
 add_subdirectory(Polinom)
@@ -29,6 +30,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Exception)
 add_subdirectory(Exception)
 
 
-#target_link_libraries(${Monom} ${MonomLib} ) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
+#target_link_libraries(${Monom} ${MonomLib}) 
 #target_link_libraries(${Polinom} ${PolinomLib} )
 #target_link_libraries(${Polinom} ${MonomLib} )

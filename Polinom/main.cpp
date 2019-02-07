@@ -1,9 +1,9 @@
 #include <iostream>
 #include "../Exception/Exception.h"
-#include "TPolinom.h"
-#include "TPolinom.cpp"
+#include "../PolinomLib/TPolinom.h"
+#include "../PolinomLib/TPolinom.cpp"
 using namespace std;
-void main() 
+int main() 
 {
 	try
 	{
@@ -19,7 +19,7 @@ void main()
 		f[i] = 1;
 	TMonom j(l);
 	TMonom c(5, f, 5);
-
+	return 0;
 	}
 	catch (TException ex)
 	{
