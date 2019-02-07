@@ -9,6 +9,6 @@ script:
   - cmake ../381706-1_Rezantsev_All_Labs
   - make -j
   - ./Polinom/Polinom
-  - cd ./test/test
+  - cd ../test/test
 notifications:
   email: false
