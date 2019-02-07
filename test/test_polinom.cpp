@@ -1,4 +1,4 @@
-#include "gtest.h"
+#include "../gtest/gtest.h"
 #include "../PolinomLib/TPolinom.h"
 #include "../PolinomLib/TPolinom.cpp"
 int ms1[] = { 1, 2, 3 };
