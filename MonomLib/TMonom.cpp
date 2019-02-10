@@ -224,7 +224,7 @@ bool TMonom::operator>(TMonom& A)
 	if (n != A.n)
 		throw TException("Error. Non eq size");
 	if (*this == A)
-		throw TException("Error. Monoms eq");
+		return false;
 	for (int i = 0; i < n; i++)
 	{
 		if (power[i] == A.power[i])
@@ -242,7 +242,7 @@ bool TMonom::operator<(TMonom& A)
 	if (n != A.n)
 		throw TException("Error. Non eq size");
 	if (*this == A)
-		throw TException("Error. Monoms eq");
+		return false;
 	for (int i = 0; i < n; i++)
 	{
 		if (power[i] == A.power[i])
