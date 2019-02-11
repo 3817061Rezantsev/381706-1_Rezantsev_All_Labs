@@ -6,9 +6,8 @@
 class TException
 {
 private:
-	std::string str;
-public:
-	TException(std::string _str);
+ 	std::string str;
+public:	TException(std::string _str);
 	void Show();
 };
 
