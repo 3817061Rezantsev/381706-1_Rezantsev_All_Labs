@@ -11,7 +11,7 @@ protected:
 public:
 	TPolynom(int _n);
 	TPolynom(TPolynom &p);
-
+  ~TPolynom();
 	int GetSize();
 	TMonom* GetStart();
 
