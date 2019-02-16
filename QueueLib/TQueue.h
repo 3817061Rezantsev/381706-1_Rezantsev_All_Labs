@@ -14,8 +14,10 @@ public:
 	TQueue(TQueue<T> &A);
 	void Put(T A);
 	T Get();
+	T Top();
 	bool IsFull();
 	bool IsEmpty();
+	void Print();
 };
 //-------------------------------------------------------------------------------------------------
 template <class T>
@@ -78,20 +80,10 @@ TQueue<T>::TQueue(int n) : TStack<T>(n)
 }
 //-------------------------------------------------------------------------------------------------
 template <class T>
-TQueue<T>::TQueue(TQueue<T> &A) : TStack<T>(A)
+TQueue<T>::TQueue(TQueue<T> &q) : TStack<T>(q)
 {
-	start = A.start;
-	count = A.count;
-	this->size = A.size;
-	this->r = A.r;
-	if (this->size == 0)
-		this->m = 0;
-	else
-	{
-		this->m = new T[this->size];
-		for (int i = 0; i < this->size;i++)
-			this->m[i] = A.m[i];
-	}
+	start = q.start;
+	count = q.count;
 }
 //-------------------------------------------------------------------------------------------------
 template <class T>
@@ -107,3 +99,17 @@ void TQueue<T>::Put(T A)
 			this->r = 0;
 	}
 }
+//-------------------------------------------------------------------------------------------------
+template<class T>
+void TQueue<T>::Print()
+{
+	for (int i = start; i < TStack<T>::r; i = (i + 1) % TStack<T>::size)
+		cout << TStack<T>::m[i];
+}
+//-------------------------------------------------------------------------------------------------
+template<class T>
+inline T TQueue<T>::Top()
+{
+	return TStack<T>::m[start];
+}
+//-------------------------------------------------------------------------------------------------
