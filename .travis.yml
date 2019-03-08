@@ -11,9 +11,12 @@ script:
   - ./Polsk/Polsk
   - ./Polinom/Polinom
   - ./Vector/Vector
+  - ./List/List
   - ./Matrix/Matrix
+  - ./ArrayList/ArrayList
   - ./Queue/Queue
   - ./Stack/Stack
+  - ./MStack/MStack
   - ./test/test
 notifications:
   email: false
