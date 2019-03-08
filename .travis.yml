@@ -15,8 +15,7 @@ script:
   - ./Matrix/Matrix
   - ./ArrayList/ArrayList
   - ./Queue/Queue
-  - cd ./Stack
-  - cd ./MStack
+  - ./MStack/MStack
   - cd ./test
 notifications:
   email: false
