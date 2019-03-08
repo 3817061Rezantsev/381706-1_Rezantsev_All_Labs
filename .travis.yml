@@ -17,6 +17,6 @@ script:
   - ./Queue/Queue
   - ./Stack/Stack
   - ./MStack/MStack
-  - ./test/test
+  - cd ./test
 notifications:
   email: false
