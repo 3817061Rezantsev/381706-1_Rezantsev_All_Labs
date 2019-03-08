@@ -12,10 +12,12 @@ script:
   - ./Polinom/Polinom
   - ./Vector/Vector
   - ./List/List
+  - ./SList/SList
   - ./Matrix/Matrix
   - ./ArrayList/ArrayList
   - ./Queue/Queue
   - ./MStack/MStack
+  - ./Stack/Stack
   - cd ./test
 notifications:
   email: false
