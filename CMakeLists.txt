@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8) #Проверка версии CMake.
 set(PROJECT_NAME 381706-1_Rezantsev_All_Labs) #Создаем обычную локальную переменную с именем проекта
 project(${PROJECT_NAME}) # Название проекта
 set (Vector Vector)
-set(VectorLib VectorLib) #Переменная с именем библиотеки
+set (VectorLib VectorLib) #Переменная с именем библиотеки
 set (Matrix Matrix)
 set (MatrixLib MatrixLib)
 set (test test)
@@ -17,7 +17,9 @@ set (Queue Queue)
 set (QueueLib QueueLib)
 set (MStack MStack)
 set (MStackLib MStackLib)
-set(Exception Exception)
+set (Exception Exception)
+set (Polsk Polsk)
+set (PolskLib PolskLib) 
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
@@ -59,6 +61,10 @@ add_subdirectory(MStackLib)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Exception)
 add_subdirectory(Exception)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolskLib)
+add_subdirectory(Polsk)
+add_subdirectory(PolskLib)
+
 
 #target_link_libraries(${Vector} ${VectorLib} ) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
 
@@ -71,3 +77,4 @@ add_subdirectory(Exception)
 #target_link_libraries(${Queue} ${QueueLib} )
 #target_link_libraries(${List} ${ListLib} )
 #target_link_libraries(${ArrayList} ${AListLib} )
+#target_link_libraries(${Polsk} ${PolskLib} )
