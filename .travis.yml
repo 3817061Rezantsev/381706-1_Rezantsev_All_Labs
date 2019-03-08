@@ -9,6 +9,9 @@ script:
   - cmake ../381706-1_Rezantsev_All_Labs
   - make -j
   - ./Polsk/Polsk
+  - ./Polinom/Polinom
+  - ./Vector/Vector
+  - ./Matrix/Matrix
   - ./Queue/Queue
   - ./Stack/Stack
   - ./test/test

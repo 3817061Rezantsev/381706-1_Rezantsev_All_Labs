@@ -20,6 +20,10 @@ set (MStackLib MStackLib)
 set (Exception Exception)
 set (Polsk Polsk)
 set (PolskLib PolskLib) 
+set (Polinom Polinom)
+set (PolinomLib PolinomLib)
+set (Monom Monom)
+set (MonomLib MonomLib)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
@@ -36,6 +40,14 @@ add_subdirectory(VectorLib)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MatrixLib)
 add_subdirectory(Matrix)
 add_subdirectory(MatrixLib)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MonomLib)
+add_subdirectory(Monom)
+add_subdirectory(MonomLib)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolinomLib)
+add_subdirectory(Polinom)
+add_subdirectory(PolinomLib)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ListLib)
 add_subdirectory(List)
@@ -78,3 +90,8 @@ add_subdirectory(PolskLib)
 #target_link_libraries(${List} ${ListLib} )
 #target_link_libraries(${ArrayList} ${AListLib} )
 #target_link_libraries(${Polsk} ${PolskLib} )
+#target_link_libraries(${Monom} ${MonomLib}) 
+#target_link_libraries(${Polinom} ${PolinomLib} )
+#target_link_libraries(${Polinom} ${MonomLib} )
+
+
