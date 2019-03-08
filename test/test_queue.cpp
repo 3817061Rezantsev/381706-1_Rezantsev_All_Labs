@@ -1,6 +1,6 @@
 #include "../QueueLib/TQueue.h"
-#include "TStack.h"
-#include <gtest.h>
+#include "../StackLib/TStack.h"
+#include "gtest.h"
 
 TEST(TQueue, can_create_queue)
 {

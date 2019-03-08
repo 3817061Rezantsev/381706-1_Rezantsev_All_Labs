@@ -1,7 +1,7 @@
 #include "../MStackLib/TMStack.h"
 #include "../MStackLib/TNewStack.h"
 #include "../StackLib/TStack.h"
-#include "../Exception/Exception.h"
+
 #include <gtest.h>
 TEST(TNewStack, throws_when_create_newstack_with_negative_size)
 {

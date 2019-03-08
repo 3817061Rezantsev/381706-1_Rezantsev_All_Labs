@@ -11,9 +11,9 @@ public:	TException(std::string _str);
 	void Show();
 };
 
-TException::TException(std::string _str) : str(_str) {}
+inline TException::TException(std::string _str) : str(_str) {}
 
-void TException::Show()
+inline void TException::Show()
 {
 	std::cout << "\nWarning! \nMessage: " << str << std::endl;
 }

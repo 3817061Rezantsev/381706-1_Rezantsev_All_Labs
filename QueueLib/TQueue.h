@@ -10,6 +10,7 @@ protected:
 	int start;
 	int count;
 public:
+  TQueue();
 	TQueue(int n);
 	TQueue(TQueue<T> &A);
 	void Put(T A);
@@ -111,5 +112,12 @@ template<class T>
 inline T TQueue<T>::Top()
 {
 	return TStack<T>::m[start];
+}
+//-------------------------------------------------------------------------------------------------
+template <class T>
+TQueue<T>::TQueue() : TStack<T>(0)
+{
+  start = 0;
+  count = 0;
 }
 //-------------------------------------------------------------------------------------------------

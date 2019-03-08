@@ -1,5 +1,5 @@
 #include "../SListLib/TSList.h"
-#include <gtest.h>
+#include "gtest.h"
 
 TEST(TStackList, can_create_stack)
 {
