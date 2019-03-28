@@ -26,6 +26,8 @@ set (Monom Monom)
 set (MonomLib MonomLib)
 set (SList SList)
 set (SListLib SListLib)
+set (Text Text)
+set (TextLib TextLib)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
@@ -81,6 +83,10 @@ add_subdirectory(MStackLib)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Exception)
 add_subdirectory(Exception)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/TextLib)
+add_subdirectory(Text)
+add_subdirectory(TextLib)
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolskLib)
 add_subdirectory(Polsk)
 add_subdirectory(PolskLib)
@@ -101,6 +107,7 @@ add_subdirectory(PolskLib)
 #target_link_libraries(${Monom} ${MonomLib}) 
 #target_link_libraries(${Polinom} ${PolinomLib} )
 #target_link_libraries(${Polinom} ${MonomLib} )
+#target_link_libraries(${Text} ${TextLib} )
 #target_link_libraries(${SList} ${SListLib} )#Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
 
 #target_link_libraries(${SList} ${ListLib} )
