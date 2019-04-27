@@ -8,6 +8,6 @@ before_script:
 script:
   - cmake ../381706-1_Rezantsev_All_Labs
   - make -j
-  - ./test/test
+  - cd ./test
 notifications:
   email: false
