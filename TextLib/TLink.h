@@ -1,5 +1,14 @@
 #pragma once
-struct TMem;
+
+class TLink;
+class TMem
+{
+public:
+  TLink* pFirst;
+  TLink* pFree;
+  TLink* pLast;
+};
+
 class TText;
 class TLink
 {
@@ -25,9 +34,4 @@ public:
   void operator delete(void* p);
   ~TLink();
 };
-struct TMem
-{
-  TLink* pFirst;
-  TLink* pFree;
-  TLink* pLast;
-};
+

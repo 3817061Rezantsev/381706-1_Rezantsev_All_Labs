@@ -1,4 +1,5 @@
-﻿#include "TText.h"
+﻿#pragma once
+#include "TText.h"
 
 TText::TText()
 {

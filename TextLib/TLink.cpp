@@ -1,8 +1,10 @@
-﻿#include "TLink.h"
+﻿#pragma once
+
+#include "TLink.h"
 #include "TText.h"
 #include <cstring>
 
-void TLink::InitMem(size_t s)
+void TLink::InitMem(size_t s) 
 {
   mem.pFirst = (TLink*) new char[sizeof(TLink)*s];
   mem.pFree = mem.pFirst;
