@@ -52,6 +52,7 @@ TElem<T>& TElem<T>::operator=(TElem<T> &A)
     throw TException("Error");
   key = A.key;
   data = A.data;
+  return *this;
 }
 // ---------------------------------------------------------------------------
 template <class T>
