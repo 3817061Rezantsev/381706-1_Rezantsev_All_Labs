@@ -8,15 +8,7 @@ before_script:
 script:
   - cmake ../381706-1_Rezantsev_All_Labs
   - make -j
-  - ./Polsk/Polsk
-  - ./Polinom/Polinom
-  - ./Vector/Vector
-  - ./List/List
-  - ./Matrix/Matrix
-  - ./ArrayList/ArrayList
-  - ./Queue/Queue
-  - ./Stack/Stack
-  - ./MStack/MStack
+  - ./STable/STable
   - ./test/test
 notifications:
   email: false
